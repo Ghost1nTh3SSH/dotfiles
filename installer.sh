@@ -84,11 +84,11 @@ requirements () {
 ########## ---------- Preparing Folders ---------- ##########
 prepFolders () {
     logo "Preparing Folders"
-    if [ ! -e $HOME/.config/ghost-rice ]; then
-        mkdir $HOME/.config/ghost-rice
-        printf "%s[+] Creating $HOME/.config/ghost-rice...%s" "$CBL" "$CNC"
+    if [ ! -e $HOME/.config/ ]; then
+        mkdir $HOME/.config/
+        printf "%s[+] Creating $HOME/.config/...%s" "$CBL" "$CNC"
     else
-        printf "%s[-] $HOME/.config/ghost-rice already exists.%s" "$CGR" "$CNC"
+        printf "%s[-] $HOME/.config/ already exists.%s" "$CGR" "$CNC"
     fi
     sleep 2 
     clear
