@@ -12,7 +12,7 @@ super + Return
     kitty
 
 # theme Selector
-alt + @space
+super + @space
 	RiceSelector
 
 # program launcher
@@ -25,8 +25,9 @@ super + shift + f
 
 # launch burpsuite
 super + shift + b
-    java --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -jar /usr/bin/burpsuite
-
+    #java --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -jar /usr/bin/burpsuite
+    /usr/bin/burpsuite
+    
 # launch vscode
 super + shift + v 
     code
@@ -38,7 +39,7 @@ super + Escape
 
 # Random wallpaper
 super + alt + w
-	feh -z --no-fehbg --bg-fill ~/.config/bsbspwm/rices/$RICETHEME/walls/
+	feh -z --no-fehbg --bg-fill ~/.config/bspwm/themes/$RICETHEME/walls/
  
 #
 # bspwm hotkeys

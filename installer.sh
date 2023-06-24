@@ -13,23 +13,21 @@ date=$(date +%Y%m%d-%H%M%S)
 logo () {
 	local text="${1:?}"
 	echo -en "                                  
-	               %%%                
-	        %%%%%//%%%%%              
-	      %%************%%%           
-	  (%%//############*****%%
-	%%%%%**###&&&&&&&&&###**//
-	%%(**##&&&#########&&&##**
-	%%(**##*****#####*****##**%%%
-	%%(**##     *****     ##**
-	   //##   @@**   @@   ##//
-	     ##     **###     ##
-	     #######     #####//
-	       ###**&&&&&**###
-	       &&&         &&&
-	       &&&////   &&
-	          &&//@@@**
-	            ..***                
-			  z0mbi3 Dotfiles\n\n"
+    ▒▒▒▒▒▒▒▒▄▄▄▄▄▄▄▄▒▒▒▒▒▒
+    ▒▒█▒▒▒▄██████████▄▒▒▒▒
+    ▒█▐▒▒▒████████████▒▒▒▒
+    ▒▌▐▒▒██▄▀██████▀▄██▒▒▒
+    ▐┼▐▒▒██▄▄▄▄██▄▄▄▄██▒▒▒
+    ▐┼▐▒▒██████████████▒▒▒
+    ▐▄▐████─▀▐▐▀█─█─▌▐██▄▒
+    ▒▒█████──────────▐███▌
+    ▒▒█▀▀██▄█─▄───▐─▄███▀▒
+    ▒▒█▒▒███████▄██████▒▒▒
+    ▒▒▒▒▒██████████████▒▒▒
+    ▒▒▒▒▒█████████▐▌██▌▒▒▒
+    ▒▒▒▒▒▐▀▐▒▌▀█▀▒▐▒█▒▒▒▒▒
+    ▒▒▒▒▒▒▒▒▒▒▒▐▒▒▒▒▌▒▒▒▒▒
+   Ghost 1n TH3 SSH Dotfiles\n\n"
     printf ' %s [%s%s %s%s %s]%s\n\n' "${CRE}" "${CNC}" "${CYE}" "${text}" "${CNC}" "${CRE}" "${CNC}"
 }
 
@@ -61,7 +59,7 @@ welcome () {
 requirements () {
     logo "Installing requirements..."
 
-    packages=(bspwm polybar kitty rofi picom sxhkd feh zsh zsh-syntax-highlighting)
+    packages=(bspwm polybar kitty rofi picom sxhkd lsd feh code ranger neofetch firejail zsh zsh-syntax-highlighting)
 
     printf "%s%s[+] Checking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
     
@@ -76,7 +74,7 @@ requirements () {
             sleep 1            
         fi
     done
-    printf '\t- %s%s All requirements successfully met!%s\n' "$CGR" "$package" "$CNC"
+    printf '\t- %sAll requirements successfully met!%s\n' "$CGR" "$CNC"
     sleep 3
     clear
 }
@@ -86,9 +84,9 @@ prepFolders () {
     logo "Preparing Folders"
     if [ ! -e $HOME/.config/ ]; then
         mkdir $HOME/.config/
-        printf "%s[+] Creating $HOME/.config/...%s" "$CBL" "$CNC"
+        printf "\t- Creating $HOME/.config/..."
     else
-        printf "%s[-] $HOME/.config/ already exists.%s" "$CGR" "$CNC"
+        printf "\t- $HOME/.config/ already exists."
     fi
     sleep 2 
     clear
@@ -98,11 +96,53 @@ prepFolders () {
 copyRice () {
     logo "Installing dotfiles..."
     printf "%s[+] Copying files to respective directories...\n%s" "$CBL" "$CNC"
+
+    for folder in ./ghost-rice/*; do
+        cp -R "${folder}" ~/.config
+        if [ $? -eq 0 ]; then
+            printf "\t-%s folder copied succesfully into '${HOME}/.config/'!%s\n" "${folder}" "${CNC}"
+            sleep 1
+        else
+            printf "\t-%s%s failed to been copied, you must copy it manually%s\n" "${CRE}" "${folder}" "${CNC}"
+            sleep 1
+        fi
+    done
+
+    for file in ./home/*; do
+        cp -R "${folder}" ~/
+        if [ $? -eq 0 ]; then
+            printf "\t-%s%s file copied succesfully into your home directory!%s\n" "${file}" "${CNC}"
+            sleep 1
+        else
+            printf "\t-%s%s%s failed to been copied, you must copy it manually%s\n" "${CRE}" "${file}" "${CNC}"
+            sleep 1
+        fi
+    done
+
+    for folder in ./misc/*; do
+        cp -R -f "${folder}" ~/.local/share/fonts/
+        if [ $? -eq 0 ]; then
+            printf "\t-%s copied succesfully into '${HOME}/.local/share/fonts/'!%s\n" "${folder}" "${CNC}"
+            sleep 1
+        else
+            printf "\t-%s%s failed to been copied, you must copy it manually%s\n" "${CRE}" "${folder}" "${CNC}"
+            sleep 1
+        fi
+    done
+
+    fc-cache -rv >/dev/null 2>&1
+    printf "%s[+] Files copied succesfully!!%s\n" "${CGR}" "${CNC}"
+    sleep 1
 }
 
-########## --------- Changing shell to zsh ---------- ##########
+########## --------- Changing shell to zsh power10k ---------- ##########
 chShell () {
-    logo "Changing default shell to zsh..."
+    logo "Changing default shell to zsh power10k..."
+    
+    # Download powerlevel10k
+    git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
+    echo 'source ~/.config/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+
     printf "%s%sIf your shell is not zsh will be changed now.\nYour root password is needed to make the change.\n\nAfter that is important for you to reboot.\n %s\n" "${BLD}" "${CRE}" "${CNC}"
     if [[ $SHELL != "/usr/bin/zsh" ]]; then
         echo "Changing shell to zsh, your root password is needed."

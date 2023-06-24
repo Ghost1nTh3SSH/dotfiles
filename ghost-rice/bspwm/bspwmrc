@@ -50,8 +50,9 @@ done
 
 # Launch picom // If you have old hardware or encounter problems 
 # uncomment the picom "--legacy-backends" line and comment the current one.
-picom --config "$HOME"/.config/bspwm/picom.conf &
-#picom --legacy-backends --config "$HOME"/.config/bspwm/picom.conf &
+picom -b --config "$HOME"/.config/bspwm/picom.conf --log-level=info --log-file=/var/log/picom.log
+
+# picom --experimental-backends --config "$HOME"/.config/bspwm/picom.conf &
 
 # Launch dunst notification daemon (maybe to remove)
 # dunst -config "$HOME"/.config/bspwm/dunstrc &
@@ -65,5 +66,8 @@ sxhkd -c "$HOME"/.config/bspwm/sxhkdrc &
 # Launch polkit (maybe to remove)
 # pidof -q polkit-gnome-authentication-agent-1 || { /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & }
 
-# Fix cursor (maybe to remove)
-# xsetroot -cursor_name left_ptr
+# Fix cursor
+xsetroot -cursor_name left_ptr
+
+# vmware clipboard
+vmware-user-suid-wrapper
