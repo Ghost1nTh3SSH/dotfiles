@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+#  _____                     ___                  
+# |  _  |                   / _ \                 
+# | | | |_ __   ___ _ __   / /_\ \_ __  _ __  ___ 
+# | | | | '_ \ / _ \ '_ \  |  _  | '_ \| '_ \/ __|
+# \ \_/ / |_) |  __/ | | | | | | | |_) | |_) \__ \
+#  \___/| .__/ \___|_| |_| \_| |_/ .__/| .__/|___/
+#       | |                      | |   | |        
+#       |_|                      |_|   |_|        
+                                                                                                          
+# From here you can control your favorite applications for all themes.
+
+case "$1" in
+  --menu)
+    rofi -show drun \
+		 -theme $HOME/.config/bspwm/themes/${RICETHEME}/launcher.rasi;;
+
+  --rice)
+	RiceSelector;;
+
+  --terminal)
+    kitty;;
+
+  --floating)
+    kitty --class FloaTerm,kitty \
+					-o window.dimensions.lines=22 \
+					window.dimensions.columns=90;;
+
+  --update)
+    kitty --hold --class FloaTerm,kitty \
+					-o window.dimensions.lines=22 \
+					   window.dimensions.columns=90 \
+					-e Updates --update-system;;
+
+  --checkupdates)
+	kitty --hold --class Updating,kitty \
+					-o window.dimensions.lines=22 \
+					   window.dimensions.columns=47 \
+					-e Updates --print-updates;;
+
+  --ranger)
+    kitty --class FloaTerm,kitty \
+					-o window.dimensions.lines=14 \
+					   window.dimensions.columns=90 \
+					-e ranger;;
+
+  --nvim)
+    kitty -e nvim;;
+
+  --music)
+    kitty --class FloaTerm,kitty \
+					-o window.dimensions.lines=18 \
+					   window.dimensions.columns=67 \
+					-e ncmpcpp;;
+
+  --fetch)
+    kitty --hold --class FloaTerm,kitty \
+					-o window.dimensions.lines=26 \
+					   window.dimensions.columns=40 \
+					-e ~/.local/bin/sysfetch;;
+
+  #Apps
+  --filemanager)
+	thunar;;
+
+  --browser)
+	firefox;;
+
+  --editor)
+	geany;;
+
+  --telegram)
+	telegram;;
+
+  --whats)
+	whatsapp-nativefier --disable-gpu;;
+
+  --soundcontrol)
+    pavucontrol;;
+
+  *)
+    echo "Opción no válida";;
+esac
