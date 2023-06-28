@@ -74,7 +74,7 @@ requirements () {
             sleep 1            
         fi
     done
-    printf '\t- %sAll requirements successfully met!%s\n' "$CGR" "$CNC"
+    printf '%s[+] All requirements successfully met!%s\n' "$CGR" "$CNC"
     sleep 3
     clear
 }
@@ -127,29 +127,32 @@ copyRice () {
 ########## --------- Changing shell to zsh power10k ---------- ##########
 chShell () {
     logo "Changing default shell to zsh power10k..."
-    
+
+    # Download powerlevel10k
+    if [ -d "~/.config/powerlevel10k" ]; then
+        git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
+    fi
+
+    # Setup P10K theme and ZSH config
+    cp -f home/p10k.zsh ~/.p10k.zsh && cp -f home/zshrc ~/.zshrc
+
+    if [ $? -eq 0 ]; then
+        printf "\t-%s files copied succesfully into your home directory!%s\n" "${file}" "${CNC}"
+        sleep 1
+    else
+        printf "\t-%s %s failed to been copied, you must copy it manually%s\n" "${CRE}" "${file}" "${CNC}"
+        sleep 1
+    fi
+    # done
+
     printf "%s%sIf your shell is not zsh will be changed now.\nYour root password is needed to make the change.\n\nAfter that is important for you to reboot.\n %s\n" "${BLD}" "${CRE}" "${CNC}"
     if [[ $SHELL != "/usr/bin/zsh" ]]; then
         echo "Changing shell to zsh, your root password is needed."
         chsh -s /usr/bin/zsh
-        
-        # Download powerlevel10k
-        git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
-        echo 'source ~/.config/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-
-        # Setup P10K theme and ZSH config
-        for file in ./home/*; do
-            cp -R "${folder}" ~/
-            if [ $? -eq 0 ]; then
-                printf "\t-%s files copied succesfully into your home directory!%s\n" "${file}" "${CNC}"
-                sleep 1
-            else
-                printf "\t-%s%s failed to been copied, you must copy it manually%s\n" "${CRE}" "${file}" "${CNC}"
-                sleep 1
-            fi
-        done
+        printf "%s%s[+] Installation finished successfully, now reboot the system.\n%sGood bye!\n" "${BLD}" "${CGR}" "${CNC}"
+        zsh
     else
-        printf "%s%sInstallation finished successfully, now reboot the system.\n%sGood bye!\n" "${BLD}" "${CGR}" "${CNC}"
+        printf "%s%s[+] Installation finished successfully, now reboot the system.\n%sGood bye!\n" "${BLD}" "${CGR}" "${CNC}"
         zsh
     fi
 }
