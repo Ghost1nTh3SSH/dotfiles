@@ -59,7 +59,7 @@ welcome () {
 requirements () {
     logo "Installing requirements..."
 
-    packages=(bspwm polybar kitty rofi picom sxhkd lsd feh code ranger neofetch firejail zsh zsh-syntax-highlighting)
+    packages=(bspwm polybar kitty rofi picom sxhkd lsd feh code firejail fonts-jetbrains-mono zsh zsh-syntax-highlighting)
 
     printf "%s%s[+] Checking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
     
@@ -98,23 +98,12 @@ copyRice () {
     printf "%s[+] Copying files to respective directories...\n%s" "$CBL" "$CNC"
 
     for folder in ./ghost-rice/*; do
-        cp -R "${folder}" ~/.config
+        cp -R "${folder}" ~/.config/
         if [ $? -eq 0 ]; then
             printf "\t-%s folder copied succesfully into '${HOME}/.config/'!%s\n" "${folder}" "${CNC}"
             sleep 1
         else
             printf "\t-%s%s failed to been copied, you must copy it manually%s\n" "${CRE}" "${folder}" "${CNC}"
-            sleep 1
-        fi
-    done
-
-    for file in ./home/*; do
-        cp -R "${folder}" ~/
-        if [ $? -eq 0 ]; then
-            printf "\t-%s%s file copied succesfully into your home directory!%s\n" "${file}" "${CNC}"
-            sleep 1
-        else
-            printf "\t-%s%s%s failed to been copied, you must copy it manually%s\n" "${CRE}" "${file}" "${CNC}"
             sleep 1
         fi
     done
@@ -139,16 +128,28 @@ copyRice () {
 chShell () {
     logo "Changing default shell to zsh power10k..."
     
-    # Download powerlevel10k
-    git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
-    echo 'source ~/.config/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-
     printf "%s%sIf your shell is not zsh will be changed now.\nYour root password is needed to make the change.\n\nAfter that is important for you to reboot.\n %s\n" "${BLD}" "${CRE}" "${CNC}"
     if [[ $SHELL != "/usr/bin/zsh" ]]; then
         echo "Changing shell to zsh, your root password is needed."
         chsh -s /usr/bin/zsh
+        
+        # Download powerlevel10k
+        git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
+        echo 'source ~/.config/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+
+        # Setup P10K theme and ZSH config
+        for file in ./home/*; do
+            cp -R "${folder}" ~/
+            if [ $? -eq 0 ]; then
+                printf "\t-%s files copied succesfully into your home directory!%s\n" "${file}" "${CNC}"
+                sleep 1
+            else
+                printf "\t-%s%s failed to been copied, you must copy it manually%s\n" "${CRE}" "${file}" "${CNC}"
+                sleep 1
+            fi
+        done
     else
-        printf "Installation finished successfully, now reboot%s\nGood bye!\n" "${BLD}" "${CGR}" "${CNC}"
+        printf "%s%sInstallation finished successfully, now reboot the system.\n%sGood bye!\n" "${BLD}" "${CGR}" "${CNC}"
         zsh
     fi
 }
