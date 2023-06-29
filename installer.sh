@@ -129,8 +129,8 @@ chShell () {
     logo "Changing default shell to zsh power10k..."
 
     # Download powerlevel10k
-    if [ -d "~/.config/powerlevel10k" ]; then
-        git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
+    if [ ! -d "~/.config/powerlevel10k" ]; then
+        git clone --quiet --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
     fi
 
     # Setup P10K theme and ZSH config

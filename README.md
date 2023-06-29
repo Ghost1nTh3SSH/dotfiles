@@ -5,9 +5,6 @@ Fork from [gh0stzk](https://github.com/gh0stzk/dotfiles) dotfiles adapted for De
 ## 🌿 Information
 3 different themes for BSPWM, Polybar and ZSH Powerlevel10k. With a theme selector to change on the fly.
 
-## :book: Wiki
-
-
 ## Info
 <img src="https://github.com/Ghost1nTh3SSH/dotfiles/assets/59705353/edc1ba57-8f4d-4dee-86f7-5a87060ade52" alt="Linux Fetch" align="right" width="450">
 
