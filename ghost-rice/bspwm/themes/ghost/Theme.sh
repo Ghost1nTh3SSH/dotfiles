@@ -50,9 +50,18 @@ set_p10k_config() {
 		-e "s/POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=.*/POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=038/g"
 }
 
+# Set neofetch conf
+set_neofetch() {
+	sed -i "$HOME"/.config/neofetch/config.conf \
+		-e "s/title=.*/title=\"HEAR IT IN YOUR GHOST\"/g" \
+		-e 's/image_source=.*/image_source="'${HOME//\//\\/}'\/.config\/neofetch\/ghost.png"/g' \
+		-e 's/\\n \\n \\n \\n \\n \\n \\n \\n \\n ${title}/\\n \\n \\n \\n \\n \\n \\n \\n \\n \\n \\n ${title}/g'
+
+}
+
 # Launch the bar
 launch_bars() {
-	polybar -q ghost-bar -c ${rice_dir}/config.ini &
+	polybar -q ghost-bar -c ${HOME}/.config/bspwm/themes/ghost/config.ini &
 }
 
 ### ---------- Apply Configurations ---------- ###
@@ -61,4 +70,5 @@ set_term_config
 set_picom_config
 set_rofi_config
 set_p10k_config
+set_neofetch
 launch_bars

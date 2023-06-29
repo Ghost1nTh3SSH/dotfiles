@@ -59,7 +59,7 @@ welcome () {
 requirements () {
     logo "Installing requirements..."
 
-    packages=(bspwm polybar kitty rofi picom sxhkd lsd feh code firejail fonts-jetbrains-mono zsh zsh-syntax-highlighting)
+    packages=(bspwm polybar kitty rofi picom sxhkd lsd feh code firejail neofetch fonts-jetbrains-mono zsh zsh-syntax-highlighting)
 
     printf "%s%s[+] Checking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
     

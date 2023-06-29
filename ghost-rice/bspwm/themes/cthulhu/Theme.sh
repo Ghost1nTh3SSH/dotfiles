@@ -42,7 +42,7 @@ set_rofi_config() {
 # Set p10k theme
 set_p10k_config() {
 	sed -i "$HOME"/.p10k.zsh \
-		-e"s/# typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION/typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION/g" \
+		-e "s/# typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION/typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION/g" \
 		-e "s/POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=.*/POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='󰼂 󰫰󰬁󰫵󰬂󱎦󰫵󰬂'/g" \
 		-e "s/POWERLEVEL9K_OS_ICON_FOREGROUND=.*/POWERLEVEL9K_OS_ICON_FOREGROUND=070/g" \
 		-e "s/POWERLEVEL9K_DIR_FOREGROUND=.*/POWERLEVEL9K_DIR_FOREGROUND=070/g" \
@@ -51,11 +51,19 @@ set_p10k_config() {
 
 }
 
+# Set neofetch conf
+set_neofetch() {
+	sed -i "${HOME}"/.config/neofetch/config.conf \
+		-e 's/title="[^"]*"/title="Ph'\''nglui mglw'\''nafh Cthulhu R'\''lyeh wgah'\''nagl fhtagn"/g' \
+		-e 's/image_source=.*/image_source="'${HOME//\//\\/}'\/.config\/neofetch\/cthulhu.png"/g' \
+		-e 's/\\n \\n \\n \\n \\n \\n \\n \\n \\n ${title}/${title}/g'
+}
+
 # Launch the bar
 launch_bars() {
-	polybar -q cthulhu-bar -c ${rice_dir}/config.ini &
-	polybar -q cthulhu-bar2 -c ${rice_dir}/config.ini &
-	polybar -q cthulhu-bar3 -c ${rice_dir}/config.ini &
+	polybar -q cthulhu-bar -c ${HOME}/.config/bspwm/themes/cthulhu/config.ini &
+	polybar -q cthulhu-bar2 -c ${HOME}/.config/bspwm/themes/cthulhu/config.ini &
+	polybar -q cthulhu-bar3 -c ${HOME}/.config/bspwm/themes/cthulhu/config.ini &
 }
 
 ### ---------- Apply Configurations ---------- ###
@@ -65,4 +73,5 @@ set_term_config
 set_picom_config
 set_rofi_config
 set_p10k_config
+set_neofetch
 launch_bars

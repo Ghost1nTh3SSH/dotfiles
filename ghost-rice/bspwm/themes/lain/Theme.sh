@@ -50,11 +50,18 @@ set_p10k_config() {
 		-e "s/POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=.*/POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=147/g"
 }
 
+# Set neofetch conf
+set_neofetch() {
+	sed -i "$HOME"/.config/neofetch/config.conf \
+		-e "s/title=.*/title=\"PRESENT DAY, PRESENT TIME!\"/g" \
+		-e 's/image_source=.*/image_source="'${HOME//\//\\/}'\/.config\/neofetch\/lain.png"/g'
+}
+
 # Launch the bar
 launch_bars() {
-	polybar -q lain-bar -c ${rice_dir}/config.ini &
-	polybar -q lain-bar2 -c ${rice_dir}/config.ini &
-	polybar -q lain-bar3 -c ${rice_dir}/config.ini &
+	polybar -q lain-bar -c ${HOME}/.config/bspwm/themes/lain/config.ini &
+	polybar -q lain-bar2 -c ${HOME}/.config/bspwm/themes/lain/config.ini &
+	polybar -q lain-bar3 -c ${HOME}/.config/bspwm/themes/lain/config.ini &
 }
 
 ### ---------- Apply Configurations ---------- ###
@@ -63,4 +70,5 @@ set_term_config
 set_picom_config
 set_rofi_config
 set_p10k_config
+set_neofetch
 launch_bars

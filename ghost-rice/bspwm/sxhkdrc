@@ -24,9 +24,8 @@ super + shift + f
 
 # launch burpsuite
 super + shift + b
-    #java --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -jar /usr/bin/burpsuite
     /usr/bin/burpsuite
-    
+
 # launch vscode
 super + shift + v 
     code
@@ -146,5 +145,5 @@ super + ctrl + {Left,Down,Up,Right}
     bspc node -v {-20 0,0 20,0 -20,20 0}
  
 # custom move/resize
-alt + super + {Left,Down,Up,Right}
+super + alt + {Left,Down,Up,Right}
     $HOME/.config/bspwm/scripts/bspwm_resize {west,south,north,east}
