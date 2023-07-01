@@ -1,6 +1,6 @@
 #!/bin/sh
 
-file="./target"
+file="$HOME/.config/bspwm/scripts/target"
 
 
 if [ -s $file ]; then
