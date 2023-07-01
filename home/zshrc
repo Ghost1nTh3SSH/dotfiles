@@ -291,11 +291,22 @@ function extractPorts(){
 	echo $ports | tr -d '\n' | xclip -sel clip
 	echo -e "[*] Ports copied to clipboard\n"  >> extractPorts.tmp
 	cat extractPorts.tmp; rm extractPorts.tmp
+    PORTS=$ports
 }
 
 # Create directories for pentesting
 function mkt(){
 	mkdir {nmap,content,exploits,scripts}
+}
+
+function starget(){
+    /usr/bin/echo $1 > $HOME/.config/bspwm/scripts/target
+    TARGET_IP=$1
+}
+
+function utarget(){
+    /usr/bin/rm -rf $HOME/.config/bspwm/scripts/target
+    TARGET_IP=""
 }
 
 #########
@@ -310,8 +321,6 @@ alias l='/usr/bin/lsd --group-dirs=first'
 alias lla='/usr/bin/lsd -lha --group-dirs=first'
 alias ls='/usr/bin/lsd --group-dirs=first'
 alias bat='/usr/bin/batcat'
-alias starget='/usr/bin/echo $1 > $HOME/.config/bspwm/scripts/target'
-alias utarget='/usr/bin/rm -rf $HOME/.config/bspwm/scripts/target'
 alias ..='cd ..'
 
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
