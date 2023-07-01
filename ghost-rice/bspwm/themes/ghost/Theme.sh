@@ -55,7 +55,7 @@ set_neofetch() {
 	sed -i "$HOME"/.config/neofetch/config.conf \
 		-e "s/title=.*/title=\"HEAR IT IN YOUR GHOST\"/g" \
 		-e 's/image_source=.*/image_source="'${HOME//\//\\/}'\/.config\/neofetch\/ghost.png"/g' \
-		-e 's/\\n \\n \\n \\n \\n \\n \\n \\n \\n ${title}/\\n \\n \\n \\n \\n \\n \\n \\n \\n \\n \\n ${title}/g'
+		-e 's/prin \".*${title}/prin \"\\n \\n \\n \\n \\n \\n \\n \\n \\n \\n \\n \\n ${title}/g'
 
 }
 

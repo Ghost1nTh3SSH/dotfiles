@@ -54,7 +54,8 @@ set_p10k_config() {
 set_neofetch() {
 	sed -i "$HOME"/.config/neofetch/config.conf \
 		-e "s/title=.*/title=\"PRESENT DAY, PRESENT TIME!\"/g" \
-		-e 's/image_source=.*/image_source="'${HOME//\//\\/}'\/.config\/neofetch\/lain.png"/g'
+		-e 's/image_source=.*/image_source="'${HOME//\//\\/}'\/.config\/neofetch\/lain.png"/g' \
+		-e 's/prin \".*${title}/prin \"\\n \\n \\n \\n \\n \\n \\n \\n \\n \\n${title}/g' 
 }
 
 # Launch the bar

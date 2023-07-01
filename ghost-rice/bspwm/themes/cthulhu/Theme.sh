@@ -56,7 +56,7 @@ set_neofetch() {
 	sed -i "${HOME}"/.config/neofetch/config.conf \
 		-e 's/title="[^"]*"/title="Ph'\''nglui mglw'\''nafh Cthulhu R'\''lyeh wgah'\''nagl fhtagn"/g' \
 		-e 's/image_source=.*/image_source="'${HOME//\//\\/}'\/.config\/neofetch\/cthulhu.png"/g' \
-		-e 's/\\n \\n \\n \\n \\n \\n \\n \\n \\n ${title}/${title}/g'
+		-e 's/prin \".*${title}/prin \"${title}/g'
 }
 
 # Launch the bar
